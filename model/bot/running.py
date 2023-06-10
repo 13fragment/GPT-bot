@@ -27,7 +27,7 @@ class Summary(StatesGroup):
 async def greeting(message:types.Message):
     await message.answer(text=welcome_msg,parse_mode='HTML',reply_markup=keyboard)
 
-@dp.message_handler(Text(equals='Summarise It', ignore_case=True), state=None)
+@dp.message_handler(Text(equals='Summarize It', ignore_case=True), state=None)
 async def greeting(message:types.Message):
     await Summary.URL.set()
     await message.reply('Введите ссылку на видео')
@@ -41,7 +41,6 @@ async def a_login(message:types.Message,state: FSMContext):
 @dp.message_handler(commands=['help','помощь'])
 async def help_command(message:types.Message):
     await message.reply('Связь с тех поддержкой: @mgo1ubev')
-
 
 if __name__ == '__main__':
     executor.start_polling(dp,skip_updates='True')
