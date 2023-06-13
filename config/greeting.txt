@@ -1,1 +1,1 @@
-Hi everybody!
+Hello there! I am your personal video summarizer bot. Let me help you save time by summarizing any YouTube video you want. Just provide me with the link and I'll give you a brief yet informative summary of the video's content. Let's get started!
