@@ -31,7 +31,7 @@ async def greeting(message:types.Message):
 @dp.message_handler(Text(equals='Summarize It', ignore_case=True), state=None)
 async def greeting(message:types.Message):
     await Summary.URL.set()
-    await message.reply('Введите ссылку на видео')
+    await message.reply('Drop the link')
 
 @dp.message_handler(state=Summary.URL)
 async def a_login(message:types.Message,state: FSMContext):
