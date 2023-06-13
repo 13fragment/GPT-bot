@@ -4,6 +4,7 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher.filters.state import StatesGroup,State
 from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher import FSMContext
+from model.GPT.main import generate_summary,get_transcripts
 import json
 
 
@@ -17,7 +18,7 @@ with open('/home/max/PycharmProjects/GPT-bot/config/greeting.txt', encoding='utf
     welcome_msg = greeting.read()
 commands_welcome = ['start', 'начать', 'Начать', 'НАЧАТЬ', 'Start']
 
-keyboard = ReplyKeyboardMarkup(keyboard = [[KeyboardButton('Summarise It')]],
+keyboard = ReplyKeyboardMarkup(keyboard = [[KeyboardButton('Summarize It')]],
 resize_keyboard=True,one_time_keyboard=True)
 
 class Summary(StatesGroup):
@@ -36,7 +37,9 @@ async def greeting(message:types.Message):
 async def a_login(message:types.Message,state: FSMContext):
     async with state.proxy() as data:
         data['URL'] = message.text
-    await message.answer(data["URL"])
+    await state.finish()
+    await message.reply(generate_summary(get_transcripts(data["URL"])))
+    await message.answer("Video successfully summarized!")
 
 @dp.message_handler(commands=['help','помощь'])
 async def help_command(message:types.Message):
